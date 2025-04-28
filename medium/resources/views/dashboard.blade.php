@@ -3,22 +3,32 @@
        
 
 <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+    
+    @foreach ($category as $cat)
     <li class="me-2">
-        <a href="#" class="inline-block px-4 py-3 text-white bg-blue-600 rounded-lg active" aria-current="page">Tab 1</a>
+        <a href="#" class="inline-block px-4 py-3 text-white bg-blue-600 rounded-lg active" aria-current="page" value="{{$cat->id}}">{{$cat->title}}</a>
     </li>
-    <li class="me-2">
-        <a href="#"  class="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white">Tab 2</a>
-    </li>
-    <li class="me-2">
-        <a href="#" class="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white">Tab 3</a>
-    </li>
-    <li class="me-2">
-        <a href="#" class="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white">Tab 4</a>
-    </li>
-    <li>
-        <a class="inline-block px-4 py-3 text-gray-400 cursor-not-allowed dark:text-gray-500">Tab 5</a>
-    </li>
-</ul>
+    @endforeach
+   </ul>
+
+
+   
+
+   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    @foreach ($posts as $item)
+        <x-post-card
+            title="{{ $item->title }}" 
+            content="{{ substr($item->content,0,length: 60) }}..." 
+            {{-- image="{{ $item->image }}"  --}}
+            image="https://placehold.co/400"
+            link="{{ $item->slug }}"
+        />
+    @endforeach
+    
+</div>
+<div>
+    {{$posts->links()}}
+</div>
 
         
     </x-slot>
