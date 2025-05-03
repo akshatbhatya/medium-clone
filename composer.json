@@ -1,0 +1,15 @@
+{
+    "name": "asus/medium-clone",
+    "autoload": {
+        "psr-4": {
+            "Asus\\MediumClone\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "akshatbhatya",
+            "email": "akshatbhatya@gmail.com"
+        }
+    ],
+    "require": {}
+}
