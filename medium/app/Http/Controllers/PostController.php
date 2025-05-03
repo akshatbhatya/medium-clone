@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostRequest;
 use App\Models\category;
 use App\Models\post;
 use Illuminate\Http\Request;
+use Str;
 
 class PostController extends Controller
 {
@@ -26,15 +28,41 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view("post");
+        $category=category::all();
+        return view("post",[
+            "categories"=>$category
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        dd($request->all());
+        $validation = $request->validated();
+
+        $validation["user_id"] = auth()->id();
+        $validation["slug"] = Str::slug($request->title);
+        $validation["published_at"] = now();
+    
+        if ($request->hasFile('image')) {
+            $image = $request->file(key: 'image');
+            $ext = $image->getClientOriginalExtension();
+            $imageName = "img_" . time() . '.' . $ext;
+            $image->move(public_path('images'), $imageName);
+            $url = asset('images/' . $imageName);
+            $validation['image'] = $url;
+        }
+    
+        try {
+            $res = Post::create($validation);
+            if ($res) {
+                return redirect()->route("dashboard");
+            }
+        } catch (\Throwable $th) {
+            return back()->with('error', 'Something went wrong: ' . $th->getMessage());
+        }
+      
     }
 
     /**

@@ -18,9 +18,9 @@
     @foreach ($posts as $item)
         <x-post-card
             title="{{ $item->title }}" 
-            content="{{ substr($item->content,0,length: 60) }}..." 
-            {{-- image="{{ $item->image }}"  --}}
-            image="https://placehold.co/400"
+            content="{{Str::limit(strip_tags($item->content), 60)}}..." 
+            image="{{ $item->image }}" 
+            {{-- image="https://placehold.co/400" --}}
             link="{{ $item->slug }}"
         />
     @endforeach

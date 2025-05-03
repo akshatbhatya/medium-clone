@@ -1,1 +1,5 @@
 /vendor/
+/img
+medium/public/images/img_1746293096.jpg
+medium/public/images/*
+medium/public/*images/*
