@@ -16,13 +16,22 @@
 
    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-5">
     @foreach ($posts as $item)
-        <x-post-card
-            title="{{ $item->title }}" 
-            content="{{Str::limit(strip_tags($item->content), 60)}}..." 
-            image="{{ $item->image }}" 
-            {{-- image="https://placehold.co/400" --}}
+   
+    @php
+    $username = $item->user->username ?? '';
+    
+   @endphp
+   
+   <x-post-card
+            username="{{ $username }}"
+            title="{{ $item->title }}"
+            content="{{ Str::limit(strip_tags($item->content), 60) }}..."
+            image="{{ $item->image }}"
             link="{{ $item->slug }}"
-        />
+            postid="{{ $item->id }}"
+/>
+
+        
     @endforeach
     
 </div>

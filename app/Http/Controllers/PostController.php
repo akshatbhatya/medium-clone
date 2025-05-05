@@ -15,8 +15,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $category=category::all();
-        $posts=post::orderByDesc("created_at")->paginate(10);
+        $category=Category::all();
+        $posts=Post::orderByDesc("created_at")->paginate(10);
         return view("dashboard",[
             'category'=>$category,
             'posts'=>$posts
@@ -28,7 +28,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $category=category::all();
+        $category=Category::all();
         return view("post",[
             "categories"=>$category
         ]);
@@ -68,10 +68,18 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(post $post)
+    // public function show($username,post $post,$id)
+    // {
+    //    dd("here");
+    // }
+
+    public function show($username, $post, $id)
     {
-       return "ww".$post->slug;
+        $res = Post::find($id);
+        return view("detailpage",["data"=>$res]);
+    
     }
+
 
     /**
      * Show the form for editing the specified resource.

@@ -17,6 +17,10 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+
+     protected $table = 'users';
+    protected $primaryKey = 'id';
+
     protected $fillable = [
         'name',
         'email',
@@ -47,5 +51,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
     }
 }
