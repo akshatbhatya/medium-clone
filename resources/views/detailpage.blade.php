@@ -54,7 +54,7 @@
             100% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; }
         }
     </style>
-</head>
+  
 <body class="antialiased">
     <div class="container max-w-4xl mx-auto px-8 py-12 mt-12 mb-12 rounded-2xl shadow-2xl relative">
         <div class="parallax-bg"></div>
@@ -63,7 +63,7 @@
             <p class="text-xl md:text-2xl mt-4 italic">{{$data->category->title}}</p>
             
             <div class="flex items-center mt-8">
-                <img src="{{$data->image}}" alt="Author Avatar" class="w-14 h-14 rounded-full border-2 border-gray-600">
+                <img src="{{$data->image?? "https://i.pravatar.cc/300"}}" alt="Author Avatar" class="w-14 h-14 rounded-full border-2 border-gray-600">
                 <div class="ml-4">
                     <span class="font-semibold text-lg text-gray-200">{{$data->user->username}}</span>
                     <p class="text-sm text-gray-400">Published on  {{ \Carbon\Carbon::parse($data->published_at)->format('Y-m-d H:i:s') }}
@@ -79,7 +79,7 @@
                 <span class="text-gray-400 text-2xl">👏</span>
                 <button id="clap-btn" class="clap-btn text-gray-400 text-lg font-medium" onclick="triggerClap()">42 Claps</button>
             </div>
-            <p class="text-gray-400 mt-6">Written by <span class="font-semibold text-gray-200">Jane Doe</span></p>
+            <p class="text-gray-400 mt-6">Written by <span class="font-semibold text-gray-200">{{$data->user->name}}</span></p>
             <div class="flex justify-center space-x-6 mt-4">
                 <a href="#" class="text-yellow-600 hover:text-yellow-500 transition-colors">Twitter</a>
                 <a href="#" class="text-yellow-600 hover:text-yellow-500 transition-colors">LinkedIn</a>
