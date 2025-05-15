@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
        
-    <a href="{{route("post.create")}}">Create Post</a>
+    <a href="{{route("post.create")}}" class="py-3 px-4 bg-green-800 text-white rounded-lg">Create Post</a>
 
 <ul class="flex justify-center  flex-wrap text-sm font-medium text-center text-gray-500 dark:text-gray-400">
     
